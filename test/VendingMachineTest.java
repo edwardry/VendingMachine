@@ -4,22 +4,29 @@ import org.unitils.UnitilsJUnit4;
 import org.unitils.mock.Mock;
 import org.unitils.mock.core.MockObject;
 
-public class VendingMachineBankTest extends UnitilsJUnit4 {
+import static org.junit.Assert.assertEquals;
+
+public class VendingMachineTest extends UnitilsJUnit4 {
+    private VendingMachine vendingMachine;
     private Mock<VendingMachineBank> mockBank;
     private Double coin;
-    private String result = "";
+    private String expectedResult = "";
+    private String actualResult = "";
 
     @Before
     public void setUp() {
         mockBank = new MockObject<>(VendingMachineBank.class, this);
+        vendingMachine = new VendingMachine();
+        vendingMachine.setBank(mockBank.getMock());
     }
 
     @Test
     public void WhenCustomerInsertsAValidCoinAsFirstTransactionInBankThenValueOfCoinIsDisplayedOnScreen() {
         coin = .05;
-        result = "$0.05";
-        mockBank.returns(result).depositMoney(coin);
-        mockBank.getMock().depositMoney(coin);
+        expectedResult = "$0.05";
+        mockBank.returns(expectedResult).depositMoney(coin);
+        actualResult = vendingMachine.insertCoin(coin);
         mockBank.assertInvoked().depositMoney(coin);
+        assertEquals(expectedResult, actualResult);
     }
 }
