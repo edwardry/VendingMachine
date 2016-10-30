@@ -24,9 +24,27 @@ public class VendingMachineTest extends UnitilsJUnit4 {
     public void WhenCustomerInsertsAValidCoinAsFirstTransactionInBankThenValueOfCoinIsDisplayedOnScreen() {
         coin = .05;
         expectedResult = "$0.05";
+
         mockBank.returns(expectedResult).depositMoney(coin);
+        mockBank.returns(true).isMoneyValid(coin);
+
         actualResult = vendingMachine.insertCoin(coin);
+
         mockBank.assertInvoked().depositMoney(coin);
+        mockBank.assertInvoked().isMoneyValid(coin);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenCustomerInsertsAnInvalidCoinInBankThenScreenDisplaysInsertCoinAndReturnsCoinToTray() {
+        coin = .01;
+        expectedResult = "INSERT COIN";
+        mockBank.returns(expectedResult).depositMoney(coin);
+        mockBank.returns(false).isMoneyValid(coin);
+
+        actualResult = vendingMachine.insertCoin(coin);
+
+        mockBank.assertInvoked().isMoneyValid(coin);
         assertEquals(expectedResult, actualResult);
     }
 }

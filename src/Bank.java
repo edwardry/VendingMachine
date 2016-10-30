@@ -1,3 +1,4 @@
 public interface Bank {
-    String depositMoney(Double coin);
+    String depositMoney(Double value);
+    Boolean isMoneyValid(Double value);
 }
