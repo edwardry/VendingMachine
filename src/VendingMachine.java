@@ -8,8 +8,4 @@ public class VendingMachine {
 
         return bank.depositMoney(value);
     }
-
-    public void setBank(VendingMachineBank bank) {
-        this.bank = bank;
-    }
 }

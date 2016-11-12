@@ -1,23 +1,24 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.unitils.UnitilsJUnit4;
-import org.unitils.mock.Mock;
-import org.unitils.mock.core.MockObject;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-public class VendingMachineTest extends UnitilsJUnit4 {
-    private VendingMachine vendingMachine;
-    private Mock<VendingMachineBank> mockBank;
+public class VendingMachineTest {
+    @InjectMocks private VendingMachine vendingMachine;
+    @Mock private VendingMachineBank bank;
     private Double coin;
     private String expectedResult = "";
     private String actualResult = "";
 
     @Before
     public void setUp() {
-        mockBank = new MockObject<>(VendingMachineBank.class, this);
         vendingMachine = new VendingMachine();
-        vendingMachine.setBank(mockBank.getMock());
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
@@ -25,13 +26,13 @@ public class VendingMachineTest extends UnitilsJUnit4 {
         coin = .05;
         expectedResult = "$0.05";
 
-        mockBank.returns(expectedResult).depositMoney(coin);
-        mockBank.returns(true).isMoneyValid(coin);
+        when(bank.depositMoney(coin)).thenReturn(expectedResult);
+        when(bank.isMoneyValid(coin)).thenReturn(true);
 
         actualResult = vendingMachine.insertCoin(coin);
 
-        mockBank.assertInvoked().depositMoney(coin);
-        mockBank.assertInvoked().isMoneyValid(coin);
+        verify(bank).depositMoney(coin);
+        verify(bank).isMoneyValid(coin);
         assertEquals(expectedResult, actualResult);
     }
 
@@ -39,12 +40,12 @@ public class VendingMachineTest extends UnitilsJUnit4 {
     public void WhenCustomerInsertsAnInvalidCoinInBankThenScreenDisplaysInsertCoinAndReturnsCoinToTray() {
         coin = .01;
         expectedResult = "INSERT COIN";
-        mockBank.returns(expectedResult).depositMoney(coin);
-        mockBank.returns(false).isMoneyValid(coin);
+        when(bank.depositMoney(coin)).thenReturn(expectedResult);
+        when(bank.isMoneyValid(coin)).thenReturn(false);
 
         actualResult = vendingMachine.insertCoin(coin);
 
-        mockBank.assertInvoked().isMoneyValid(coin);
+        verify(bank).isMoneyValid(coin);
         assertEquals(expectedResult, actualResult);
     }
 }
