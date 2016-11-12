@@ -1,7 +1,7 @@
-public class VendingMachineBank implements Bank {
+public class VendingMachineBank {
 
-    public String depositMoney(Double value) {
-        return null;
+    public void depositMoney(Transaction transaction) {
+
     }
 
     public Boolean isMoneyValid(Double value) {
