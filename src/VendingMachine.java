@@ -10,6 +10,7 @@ public class VendingMachine {
     public void insertCoin(Double value) {
         if(!bank.isMoneyValid(value)) {
             screen.updateDisplay(Screen.INSERT_COIN);
+            coinReturn.updateTotal(value);
         } else {
             transaction.updateTotal(value);
             screen.updateDisplay(transaction);

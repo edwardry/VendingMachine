@@ -52,7 +52,7 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void WhenCustomerInsertsAnInvalidCoinInBankThenScreenDisplaysInsertCoin() {
+    public void WhenCustomerInsertsAnInvalidCoinInBankThenScreenDisplaysInsertCoinAndCoinIsPlacedInCoinReturn() {
         coin = .01;
         expectedResult = Screen.INSERT_COIN;
 
@@ -63,6 +63,7 @@ public class VendingMachineTest {
         actualResult = vendingMachine.checkDisplay();
 
         verify(bank).isMoneyValid(coin);
+        verify(coinReturn).updateTotal(coin);
         verify(screen).updateDisplay(expectedResult);
         assertEquals(expectedResult, actualResult);
     }
@@ -194,6 +195,7 @@ public class VendingMachineTest {
         Double extraFunds = transactionFunds - productCost;
         Double expected = 0.25;
 
+        when(bank.isMoneyValid(coin)).thenReturn(true);
         when(transaction.getTotal()).thenReturn(extraFunds);
 
         for(int i=0;i<numberOfCoins;i++) {
