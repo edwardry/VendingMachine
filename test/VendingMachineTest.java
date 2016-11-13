@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class VendingMachineTest {
     @InjectMocks private VendingMachine vendingMachine;
@@ -91,21 +89,22 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void WhenCustomerHasInsertedEnoughMoneyAndSelectsAProductThenScreenDisplaysThankYou() {
+    public void WhenCustomerHasInsertedEnoughMoneyAndSelectsAProductThenScreenDisplaysThankYouAndMoneyIsDepositedInBank() {
         coin = .25;
         int numberOfCoins = 3;
         expectedResult = Screen.THANK_YOU;
-
-        when(screen.getDisplay()).thenReturn(expectedResult);
 
         for(int i=0;i<numberOfCoins;i++) {
             vendingMachine.insertCoin(coin);
         }
 
+        when(buttons.press(product, transaction)).thenReturn(true);
         vendingMachine.pressButton(product);
 
+        when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
+        verify(bank).depositMoney(transaction);
         verify(screen).getDisplay();
         assertEquals(expectedResult, actualResult);
     }
@@ -121,6 +120,7 @@ public class VendingMachineTest {
             vendingMachine.insertCoin(coin);
         }
 
+        when(buttons.press(product, transaction)).thenReturn(true);
         vendingMachine.pressButton(product);
 
         when(screen.getDisplay()).thenReturn(initialExpectedResult);
@@ -128,8 +128,30 @@ public class VendingMachineTest {
         when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
+        verify(bank).depositMoney(transaction);
         verify(screen, times(2)).getDisplay();
         assertEquals(initialExpectedResult, initialActualResult);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenCustomerHasNotInsertedEnoughMoneyAndSelectsAProductThenScreenDisplaysPriceAndMoneyIsNotDepositedInBank() {
+        coin = .25;
+        int numberOfCoins = 3;
+        expectedResult = Screen.PRICE;
+
+        for(int i=0;i<numberOfCoins;i++) {
+            vendingMachine.insertCoin(coin);
+        }
+
+        when(buttons.press(product, transaction)).thenReturn(false);
+        vendingMachine.pressButton(product);
+
+        when(screen.getDisplay()).thenReturn(expectedResult);
+        actualResult = vendingMachine.checkDisplay();
+
+        verify(bank, never()).depositMoney(transaction);
+        verify(screen).getDisplay();
         assertEquals(expectedResult, actualResult);
     }
 }

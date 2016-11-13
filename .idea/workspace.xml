@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6781b93e-4b85-4577-825b-ed4ef6dd5369" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ButtonPanel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Product.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Screen.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Transaction.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Bank.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/VendingMachine.java" afterPath="$PROJECT_DIR$/src/VendingMachine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/VendingMachineBank.java" afterPath="$PROJECT_DIR$/src/VendingMachineBank.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Screen.java" afterPath="$PROJECT_DIR$/src/Screen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/VendingMachineTest.java" afterPath="$PROJECT_DIR$/test/VendingMachineTest.java" />
     </list>
     <ignored path="VendingMachineKata.iws" />
@@ -34,8 +28,8 @@
       <file leaf-file-name="VendingMachine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/VendingMachine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="408">
+              <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
               <folding>
                 <element signature="e#756#757#0" expanded="true" />
                 <element signature="e#798#799#0" expanded="true" />
@@ -44,11 +38,24 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ButtonPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ButtonPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+              <folding>
+                <element signature="e#95#96#0" expanded="true" />
+                <element signature="e#122#123#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Screen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Screen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+            <state relative-caret-position="187">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -70,22 +77,14 @@
       <file leaf-file-name="VendingMachineTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/VendingMachineTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="867">
-              <caret line="109" column="5" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
+            <state relative-caret-position="-563">
+              <caret line="100" column="67" selection-start-line="100" selection-start-column="67" selection-end-line="100" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#WhenCustomerInsertsAValidCoinAsFirstTransactionInBankThenValueOfCoinIsDisplayedOnScreen#0;class#VendingMachineTest#0" expanded="false" />
                 <element signature="method#WhenCustomerInsertsAnInvalidCoinInBankThenScreenDisplaysInsertCoin#0;class#VendingMachineTest#0" expanded="false" />
+                <element signature="method#WhenCustomerInsertsTwoValidCoinsInBankThenScreenDisplaysSumOfCoinValue#0;class#VendingMachineTest#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReflectiveCallable.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -133,8 +132,8 @@
         <option value="$PROJECT_DIR$/src/Transaction.java" />
         <option value="$PROJECT_DIR$/src/VendingMachineBank.java" />
         <option value="$PROJECT_DIR$/src/VendingMachine.java" />
-        <option value="$PROJECT_DIR$/src/Screen.java" />
         <option value="$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class" />
+        <option value="$PROJECT_DIR$/src/Screen.java" />
         <option value="$PROJECT_DIR$/test/VendingMachineTest.java" />
       </list>
     </option>
@@ -584,25 +583,24 @@
       <option name="project" value="LOCAL" />
       <updated>1478989527129</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Removed Bank Interface. Decided not to do anything with Interfaces in this kata. At least not for now. Added ButtonPanel, Product, Screen, and Transaction classes. The transaction class handles current transactions as a buffer to the bank which takes the money at time of product selection so that the money in the transaction is not committed to the bank until transaction is finalized. Screen will now hold the text display of the vending machine instead of the display being returned every time a coin is inserted.">
+      <created>1478994903746</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1478994903746</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Modified getDisplay in Screen class to reset display back to INSERT COIN after the current display is requested.">
+      <created>1478995517013</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1478995517013</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="VendingMachineTest - 2016.11.12 at 18h 39m 43s.xml">
-      <configuration name="VendingMachineTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="VendingMachineTest - 2016.11.12 at 18h 41m 19s.xml">
-      <configuration name="VendingMachineTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="VendingMachineTest - 2016.11.12 at 18h 42m 27s.xml">
-      <configuration name="VendingMachineTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="VendingMachineTest - 2016.11.12 at 18h 44m 33s.xml">
-      <configuration name="VendingMachineTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="VendingMachineTest - 2016.11.12 at 18h 46m 54s.xml">
-      <configuration name="VendingMachineTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="VendingMachineTest - 2016.11.12 at 18h 47m 44s.xml">
       <configuration name="VendingMachineTest" configurationId="JUnit" />
     </history-entry>
@@ -618,6 +616,21 @@
     <history-entry file="VendingMachineTest - 2016.11.12 at 18h 51m 46s.xml">
       <configuration name="VendingMachineTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="VendingMachineTest - 2016.11.12 at 19h 03m 10s.xml">
+      <configuration name="VendingMachineTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="VendingMachineTest - 2016.11.12 at 19h 04m 06s.xml">
+      <configuration name="VendingMachineTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="VendingMachineTest - 2016.11.12 at 19h 15m 17s.xml">
+      <configuration name="VendingMachineTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="VendingMachineTest - 2016.11.12 at 19h 17m 15s.xml">
+      <configuration name="VendingMachineTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="VendingMachineTest - 2016.11.12 at 19h 17m 45s.xml">
+      <configuration name="VendingMachineTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -630,7 +643,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3371522" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3371522" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -663,7 +676,9 @@
     <MESSAGE value="Refactored how I am testing and setting up the overall structure of this project. I created a VendingMachine class that will do all of the high level customer interactions and will use methods from classes like VendingMachineBank. I think this makes more sense because now all of my mocked out testing will be done in VendingMachineTest for all of the services that the VendingMachine class uses and later after I have every underlying service built out for VendingMachine I will start implementing the underlying services with their own test files." />
     <MESSAGE value="Changed my mocking library from unitils to mockito. After discovering the mockito library I found that I liked the syntax and dependency injection capabilities more than unitils." />
     <MESSAGE value="Added test for multiple valid coins being added into the vending machine" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added test for multiple valid coins being added into the vending machine" />
+    <MESSAGE value="Removed Bank Interface. Decided not to do anything with Interfaces in this kata. At least not for now. Added ButtonPanel, Product, Screen, and Transaction classes. The transaction class handles current transactions as a buffer to the bank which takes the money at time of product selection so that the money in the transaction is not committed to the bank until transaction is finalized. Screen will now hold the text display of the vending machine instead of the display being returned every time a coin is inserted." />
+    <MESSAGE value="Modified getDisplay in Screen class to reset display back to INSERT COIN after the current display is requested." />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified getDisplay in Screen class to reset display back to INSERT COIN after the current display is requested." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -693,7 +708,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#WhenCustomerInsertsAValidCoinAsFirstTransactionInBankThenValueOfCoinIsDisplayedOnScreen#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenCustomerInsertsAnInvalidCoinInBankThenScreenDisplaysInsertCoin#0;class#VendingMachineTest#0" expanded="false" />
+            <element signature="method#WhenCustomerInsertsTwoValidCoinsInBankThenScreenDisplaysSumOfCoinValue#0;class#VendingMachineTest#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -734,7 +751,9 @@
           <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#WhenCustomerInsertsAValidCoinAsFirstTransactionInBankThenValueOfCoinIsDisplayedOnScreen#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenCustomerInsertsAnInvalidCoinInBankThenScreenDisplaysInsertCoin#0;class#VendingMachineTest#0" expanded="false" />
+            <element signature="method#WhenCustomerInsertsTwoValidCoinsInBankThenScreenDisplaysSumOfCoinValue#0;class#VendingMachineTest#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -767,33 +786,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ButtonPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-          <folding>
-            <element signature="e#95#96#0" expanded="true" />
-            <element signature="e#122#123#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Product.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/VendingMachineBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
-          <folding>
-            <element signature="e#145#146#0" expanded="true" />
-            <element signature="e#172#173#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -808,25 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/VendingMachine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="e#756#757#0" expanded="true" />
-            <element signature="e#798#799#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -835,13 +813,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ButtonPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+          <folding>
+            <element signature="e#95#96#0" expanded="true" />
+            <element signature="e#122#123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/VendingMachineBank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+          <folding>
+            <element signature="e#145#146#0" expanded="true" />
+            <element signature="e#172#173#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/VendingMachine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding>
+            <element signature="e#756#757#0" expanded="true" />
+            <element signature="e#798#799#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/VendingMachineTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="109" column="5" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
+        <state relative-caret-position="-563">
+          <caret line="100" column="67" selection-start-line="100" selection-start-column="67" selection-end-line="100" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#WhenCustomerInsertsAValidCoinAsFirstTransactionInBankThenValueOfCoinIsDisplayedOnScreen#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenCustomerInsertsAnInvalidCoinInBankThenScreenDisplaysInsertCoin#0;class#VendingMachineTest#0" expanded="false" />
+            <element signature="method#WhenCustomerInsertsTwoValidCoinsInBankThenScreenDisplaysSumOfCoinValue#0;class#VendingMachineTest#0" expanded="false" />
           </folding>
         </state>
       </provider>
