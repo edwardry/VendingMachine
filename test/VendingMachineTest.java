@@ -104,6 +104,7 @@ public class VendingMachineTest {
         }
 
         when(buttons.press(product, transaction)).thenReturn(true);
+        when(product.hasInventory()).thenReturn(true);
         vendingMachine.pressButton(product);
 
         when(screen.getDisplay()).thenReturn(initialExpectedResult);
@@ -187,7 +188,7 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void WhenAProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn() {
+    public void WhenProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn() {
         coin = .25;
         int numberOfCoins = 5;
         Double transactionFunds = 1.25;
@@ -203,11 +204,39 @@ public class VendingMachineTest {
         }
 
         when(buttons.press(product, transaction)).thenReturn(true);
+        when(product.hasInventory()).thenReturn(true);
         vendingMachine.pressButton(product);
 
         verify(bank).depositMoney(transaction, product);
         verify(coinReturn).updateTotal(extraFunds);
         verify(transaction).clear();
         assertEquals(expected, extraFunds);
+    }
+
+    @Test
+    public void WhenProductIsSelectedThatIsSoldOutThenDisplaysSoldOutAndThenTransactionTotalIsDisplayed() {
+        coin = .25;
+        int numberOfCoins = 4;
+        String initialExpectedResult = Screen.SOLD_OUT;
+        expectedResult = "$1.00";
+
+        for(int i=0;i<numberOfCoins;i++) {
+            vendingMachine.insertCoin(coin);
+        }
+
+        when(buttons.press(product, transaction)).thenReturn(true);
+        when(product.hasInventory()).thenReturn(false);
+        vendingMachine.pressButton(product);
+
+        when(screen.getDisplay()).thenReturn(initialExpectedResult);
+        String initialActualResult = vendingMachine.checkDisplay();
+        when(screen.getDisplay()).thenReturn(expectedResult);
+        actualResult = vendingMachine.checkDisplay();
+
+        verify(bank, never()).depositMoney(transaction, product);
+        verify(transaction, never()).clear();
+        verify(screen, times(2)).getDisplay();
+        assertEquals(initialExpectedResult, initialActualResult);
+        assertEquals(expectedResult, actualResult);
     }
 }
