@@ -214,6 +214,27 @@ public class VendingMachineTest {
     }
 
     @Test
+    public void WhenCoinReturnButtonIsPressedThenTransactionTotalIsSentToCoinReturnAndScreenDisplaysInsertCoin() {
+        coin = .25;
+        int numberOfCoins = 3;
+        expectedResult = Screen.INSERT_COIN;
+
+        for(int i=0;i<numberOfCoins;i++) {
+            vendingMachine.insertCoin(coin);
+        }
+
+        vendingMachine.returnCoins();
+
+        when(screen.getDisplay()).thenReturn(expectedResult);
+        actualResult = vendingMachine.checkDisplay();
+
+        verify(coinReturn, times(4)).updateTotal(any(Double.class));
+        verify(transaction).clear();
+        verify(screen).getDisplay();
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void WhenProductIsSelectedThatIsSoldOutThenDisplaysSoldOutAndThenTransactionTotalIsDisplayed() {
         coin = .25;
         int numberOfCoins = 4;

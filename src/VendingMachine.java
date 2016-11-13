@@ -20,8 +20,7 @@ public class VendingMachine {
         Boolean productHasInventory = product.hasInventory();
         if(transactionHasSufficientFundsForPurchase && productHasInventory) {
             bank.depositMoney(transaction, product);
-            coinReturn.updateTotal(transaction.getTotal());
-            transaction.clear();
+            returnCoins();
         }
 
         screen.updateDisplay(transaction.getStatus());
@@ -29,5 +28,10 @@ public class VendingMachine {
 
     public String checkDisplay() {
         return screen.getDisplay();
+    }
+
+    public void returnCoins() {
+        coinReturn.updateTotal(transaction.getTotal());
+        transaction.clear();
     }
 }
