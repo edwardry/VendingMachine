@@ -12,6 +12,8 @@ public class Screen {
     }
 
     public String getDisplay() {
-        return this.display;
+        String currentDisplay = this.display;
+        updateDisplay(INSERT_COIN);
+        return currentDisplay;
     }
 }

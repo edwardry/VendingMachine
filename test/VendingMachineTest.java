@@ -106,6 +106,30 @@ public class VendingMachineTest {
 
         actualResult = vendingMachine.checkDisplay();
 
+        verify(screen).getDisplay();
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenTheScreenIsCheckedAgainAfterPurchaseOfProductThenTheScreenDisplaysInsertCoin() {
+        coin = .25;
+        int numberOfCoins = 3;
+        String initialExpectedResult = Screen.THANK_YOU;
+        expectedResult = Screen.INSERT_COIN;
+
+        for(int i=0;i<numberOfCoins;i++) {
+            vendingMachine.insertCoin(coin);
+        }
+
+        vendingMachine.pressButton(product);
+
+        when(screen.getDisplay()).thenReturn(initialExpectedResult);
+        String initialActualResult = vendingMachine.checkDisplay();
+        when(screen.getDisplay()).thenReturn(expectedResult);
+        actualResult = vendingMachine.checkDisplay();
+
+        verify(screen, times(2)).getDisplay();
+        assertEquals(initialExpectedResult, initialActualResult);
         assertEquals(expectedResult, actualResult);
     }
 }
