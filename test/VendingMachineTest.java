@@ -89,28 +89,7 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void WhenCustomerHasInsertedEnoughMoneyAndSelectsAProductThenScreenDisplaysThankYouAndMoneyIsDepositedInBank() {
-        coin = .25;
-        int numberOfCoins = 3;
-        expectedResult = Screen.THANK_YOU;
-
-        for(int i=0;i<numberOfCoins;i++) {
-            vendingMachine.insertCoin(coin);
-        }
-
-        when(buttons.press(product, transaction)).thenReturn(true);
-        vendingMachine.pressButton(product);
-
-        when(screen.getDisplay()).thenReturn(expectedResult);
-        actualResult = vendingMachine.checkDisplay();
-
-        verify(bank).depositMoney(transaction);
-        verify(screen).getDisplay();
-        assertEquals(expectedResult, actualResult);
-    }
-
-    @Test
-    public void WhenTheScreenIsCheckedAgainAfterPurchaseOfProductThenTheScreenDisplaysInsertCoin() {
+    public void WhenSufficientMoneyAndProductSelectedThenDisplaysThankYouAndMoneyIsDepositedInBankAndTransactionReset() {
         coin = .25;
         int numberOfCoins = 3;
         String initialExpectedResult = Screen.THANK_YOU;
@@ -129,16 +108,17 @@ public class VendingMachineTest {
         actualResult = vendingMachine.checkDisplay();
 
         verify(bank).depositMoney(transaction);
+        verify(transaction).clear();
         verify(screen, times(2)).getDisplay();
         assertEquals(initialExpectedResult, initialActualResult);
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
-    public void WhenCustomerHasNotInsertedEnoughMoneyAndSelectsAProductThenScreenDisplaysPriceAndMoneyIsNotDepositedInBank() {
+    public void WhenInsufficientMoneyAndProductSelectedThenDisplaysPriceAndMoneyIsNotDeposited() {
         coin = .25;
         int numberOfCoins = 3;
-        expectedResult = Screen.PRICE;
+        expectedResult = Screen.PRICE + ": $1.00";
 
         for(int i=0;i<numberOfCoins;i++) {
             vendingMachine.insertCoin(coin);
@@ -151,7 +131,39 @@ public class VendingMachineTest {
         actualResult = vendingMachine.checkDisplay();
 
         verify(bank, never()).depositMoney(transaction);
+        verify(transaction, never()).clear();
         verify(screen).getDisplay();
         assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void AfterPriceIsDisplayedDueToInsufficientFundsThenScreenDisplaysCurrentTransactionTotal() {
+        coin = .25;
+        int numberOfCoins = 3;
+        String initialExpectedResult = Screen.PRICE + ": $1.00";
+        expectedResult = "$0.75";
+
+        for(int i=0;i<numberOfCoins;i++) {
+            vendingMachine.insertCoin(coin);
+        }
+
+        when(buttons.press(product, transaction)).thenReturn(false);
+        vendingMachine.pressButton(product);
+
+        when(screen.getDisplay()).thenReturn(initialExpectedResult);
+        String initialActualResult = vendingMachine.checkDisplay();
+        when(screen.getDisplay()).thenReturn(expectedResult);
+        actualResult = vendingMachine.checkDisplay();
+
+        verify(bank, never()).depositMoney(transaction);
+        verify(transaction, never()).clear();
+        verify(screen, times(2)).getDisplay();
+        assertEquals(initialExpectedResult, initialActualResult);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenCustomerSelectsAProductWithNoMoneyInsertedThenProductPriceIsDisplayedAndThenInsertCoinIsDisplayed() {
+
     }
 }

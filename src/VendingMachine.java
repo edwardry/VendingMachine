@@ -16,6 +16,7 @@ public class VendingMachine {
     public void pressButton(Product product) {
         if(buttons.press(product, transaction)) {
             bank.depositMoney(transaction);
+            transaction.clear();
         }
 
         screen.updateDisplay(transaction.getStatus());

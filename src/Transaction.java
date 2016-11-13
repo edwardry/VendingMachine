@@ -9,4 +9,12 @@ public class Transaction {
     public String getStatus() {
         return status;
     }
+
+    public void clear() {
+        total = 0.0;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
 }
