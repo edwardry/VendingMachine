@@ -260,4 +260,25 @@ public class VendingMachineTest {
         assertEquals(initialExpectedResult, initialActualResult);
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void WhenProductIsSelectedThatIsSoldOutAndTransactionTotalIsEmptyThenScreenDisplaysSoldOutAndThenInsertCoin() {
+        String initialExpectedResult = Screen.SOLD_OUT;
+        expectedResult = Screen.INSERT_COIN;
+
+        when(buttons.press(product, transaction)).thenReturn(false);
+        when(product.hasInventory()).thenReturn(false);
+        vendingMachine.pressButton(product);
+
+        when(screen.getDisplay()).thenReturn(initialExpectedResult);
+        String initialActualResult = vendingMachine.checkDisplay();
+        when(screen.getDisplay()).thenReturn(expectedResult);
+        actualResult = vendingMachine.checkDisplay();
+
+        verify(bank, never()).depositMoney(transaction, product);
+        verify(transaction, never()).clear();
+        verify(screen, times(2)).getDisplay();
+        assertEquals(initialExpectedResult, initialActualResult);
+        assertEquals(expectedResult, actualResult);
+    }
 }

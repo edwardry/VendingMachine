@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6781b93e-4b85-4577-825b-ed4ef6dd5369" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/VendingMachine.java" afterPath="$PROJECT_DIR$/src/VendingMachine.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/VendingMachineTest.java" afterPath="$PROJECT_DIR$/test/VendingMachineTest.java" />
     </list>
     <ignored path="VendingMachineKata.iws" />
@@ -41,8 +40,8 @@
       <file leaf-file-name="VendingMachineTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/VendingMachineTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="231" column="27" selection-start-line="231" selection-start-column="27" selection-end-line="231" selection-end-column="27" />
+            <state relative-caret-position="249">
+              <caret line="278" column="8" selection-start-line="278" selection-start-column="8" selection-end-line="278" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#setUp#0;class#VendingMachineTest#0" expanded="false" />
@@ -54,6 +53,7 @@
                 <element signature="method#AfterPriceIsDisplayedDueToInsufficientFundsThenScreenDisplaysCurrentTransactionTotal#0;class#VendingMachineTest#0" expanded="false" />
                 <element signature="method#WhenCustomerSelectsAProductWithNoMoneyInsertedThenProductPriceIsDisplayedAndThenInsertCoinIsDisplayed#0;class#VendingMachineTest#0" expanded="false" />
                 <element signature="method#WhenProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn#0;class#VendingMachineTest#0" expanded="false" />
+                <element signature="method#WhenCoinReturnButtonIsPressedThenTransactionTotalIsSentToCoinReturnAndScreenDisplaysInsertCoin#0;class#VendingMachineTest#0" expanded="false" />
                 <element signature="method#WhenProductIsSelectedThatIsSoldOutThenDisplaysSoldOutAndThenTransactionTotalIsDisplayed#0;class#VendingMachineTest#0" expanded="false" />
               </folding>
             </state>
@@ -639,13 +639,17 @@
       <option name="project" value="LOCAL" />
       <updated>1479072463336</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Accidently skipped for the coin return button requirement. Added case for pressing the coin return to empty transaction total into the coin return.">
+      <created>1479073038908</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1479073038908</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="VendingMachineTest - 2016.11.13 at 15h 15m 10s.xml">
-      <configuration name="VendingMachineTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="VendingMachineTest - 2016.11.13 at 15h 17m 00s.xml">
       <configuration name="VendingMachineTest" configurationId="JUnit" />
     </history-entry>
@@ -671,6 +675,9 @@
       <configuration name="VendingMachineTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="VendingMachineTest - 2016.11.13 at 16h 36m 44s.xml">
+      <configuration name="VendingMachineTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="VendingMachineTest - 2016.11.13 at 16h 40m 42s.xml">
       <configuration name="VendingMachineTest" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -725,11 +732,12 @@
     <MESSAGE value="Added case for when more money than is needed for a purchase is inserted and the extra money is returned to the Coin Return" />
     <MESSAGE value="Went back and added the ability to return coin when an invalid coin is inserted." />
     <MESSAGE value="Added case for when a product is selected that is sold out. Screen will display sold out and then the current transaction total." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added case for when a product is selected that is sold out. Screen will display sold out and then the current transaction total." />
+    <MESSAGE value="Accidently skipped for the coin return button requirement. Added case for pressing the coin return to empty transaction total into the coin return." />
+    <option name="LAST_COMMIT_MESSAGE" value="Accidently skipped for the coin return button requirement. Added case for pressing the coin return to empty transaction total into the coin return." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -764,6 +772,7 @@
             <element signature="method#AfterPriceIsDisplayedDueToInsufficientFundsThenScreenDisplaysCurrentTransactionTotal#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenCustomerSelectsAProductWithNoMoneyInsertedThenProductPriceIsDisplayedAndThenInsertCoinIsDisplayed#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn#0;class#VendingMachineTest#0" expanded="false" />
+            <element signature="method#WhenCoinReturnButtonIsPressedThenTransactionTotalIsSentToCoinReturnAndScreenDisplaysInsertCoin#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenProductIsSelectedThatIsSoldOutThenDisplaysSoldOutAndThenTransactionTotalIsDisplayed#0;class#VendingMachineTest#0" expanded="false" />
           </folding>
         </state>
@@ -814,6 +823,7 @@
             <element signature="method#AfterPriceIsDisplayedDueToInsufficientFundsThenScreenDisplaysCurrentTransactionTotal#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenCustomerSelectsAProductWithNoMoneyInsertedThenProductPriceIsDisplayedAndThenInsertCoinIsDisplayed#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn#0;class#VendingMachineTest#0" expanded="false" />
+            <element signature="method#WhenCoinReturnButtonIsPressedThenTransactionTotalIsSentToCoinReturnAndScreenDisplaysInsertCoin#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenProductIsSelectedThatIsSoldOutThenDisplaysSoldOutAndThenTransactionTotalIsDisplayed#0;class#VendingMachineTest#0" expanded="false" />
           </folding>
         </state>
@@ -934,8 +944,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/VendingMachineTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="231" column="27" selection-start-line="231" selection-start-column="27" selection-end-line="231" selection-end-column="27" />
+        <state relative-caret-position="249">
+          <caret line="278" column="8" selection-start-line="278" selection-start-column="8" selection-end-line="278" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#setUp#0;class#VendingMachineTest#0" expanded="false" />
@@ -947,6 +957,7 @@
             <element signature="method#AfterPriceIsDisplayedDueToInsufficientFundsThenScreenDisplaysCurrentTransactionTotal#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenCustomerSelectsAProductWithNoMoneyInsertedThenProductPriceIsDisplayedAndThenInsertCoinIsDisplayed#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn#0;class#VendingMachineTest#0" expanded="false" />
+            <element signature="method#WhenCoinReturnButtonIsPressedThenTransactionTotalIsSentToCoinReturnAndScreenDisplaysInsertCoin#0;class#VendingMachineTest#0" expanded="false" />
             <element signature="method#WhenProductIsSelectedThatIsSoldOutThenDisplaysSoldOutAndThenTransactionTotalIsDisplayed#0;class#VendingMachineTest#0" expanded="false" />
           </folding>
         </state>
