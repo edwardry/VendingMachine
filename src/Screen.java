@@ -3,7 +3,9 @@ public class Screen {
     public static final String THANK_YOU = "THANK YOU";
     public static final String PRICE = "PRICE";
     public static final String SOLD_OUT = "SOLD OUT";
-    String display;
+    public static final String EXACT_CHANGE = "EXACT CHANGE ONLY";
+    private String display;
+    private String defaultMessage = "INSERT COIN";
 
     public void updateDisplay(Transaction transaction) {
 
@@ -15,5 +17,13 @@ public class Screen {
 
     public String getDisplay() {
         return display;
+    }
+
+    public void setDefaultMessage(String defaultMessage) {
+        this.defaultMessage = defaultMessage;
+    }
+
+    public String getDefaultMessage() {
+        return defaultMessage;
     }
 }

@@ -3,7 +3,7 @@ public class Product {
     private Double price;
     private Integer count;
 
-    public void Product(String name, Double price, Integer count) {
+    public Product(String name, Double price, Integer count) {
         this.name = name;
         this.price = price;
         this.count = count;

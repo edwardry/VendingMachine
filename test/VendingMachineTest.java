@@ -18,6 +18,7 @@ public class VendingMachineTest {
     @Mock private ButtonPanel buttons;
     @Mock private Transaction transaction;
     @Mock private CoinReturn coinReturn;
+    @Mock private Inventory inventory;
     private Double coin;
     private String expectedResult = "";
     private String actualResult = "";
@@ -28,7 +29,9 @@ public class VendingMachineTest {
 
     @Before
     public void setUp() {
-        vendingMachine = new VendingMachine();
+        bank = new VendingMachineBank();
+        inventory = new Inventory();
+        vendingMachine = new VendingMachine(bank, inventory);
         MockitoAnnotations.initMocks(this);
         coins = new ArrayList<>();
         expectedResults = new ArrayList<>();
@@ -58,6 +61,7 @@ public class VendingMachineTest {
 
         when(bank.isMoneyValid(coin)).thenReturn(false);
         when(screen.getDisplay()).thenReturn(expectedResult);
+        when(screen.getDefaultMessage()).thenReturn(Screen.INSERT_COIN);
 
         vendingMachine.insertCoin(coin);
         actualResult = vendingMachine.checkDisplay();
@@ -279,6 +283,19 @@ public class VendingMachineTest {
         verify(transaction, never()).clear();
         verify(screen, times(2)).getDisplay();
         assertEquals(initialExpectedResult, initialActualResult);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenVendingMachineIsNotAbleToMakeExactChangeForAnyProductThenExactChangeOnlyIsDisplayedInsteadOfInsertCoin() {
+        expectedResult = Screen.EXACT_CHANGE;
+
+        when(bank.hasSufficientChange(inventory)).thenReturn(false);
+        VendingMachine newMachine = new VendingMachine(bank, inventory);
+
+        when(screen.getDisplay()).thenReturn(Screen.EXACT_CHANGE);
+        actualResult = vendingMachine.checkDisplay();
+
         assertEquals(expectedResult, actualResult);
     }
 }

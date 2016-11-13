@@ -7,4 +7,8 @@ public class VendingMachineBank {
     public Boolean isMoneyValid(Double value) {
         return true;
     }
+
+    public boolean hasSufficientChange(Inventory inventory) {
+        return true;
+    }
 }
