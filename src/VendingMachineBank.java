@@ -1,6 +1,6 @@
 public class VendingMachineBank {
 
-    public void depositMoney(Transaction transaction) {
+    public void depositMoney(Transaction transaction, Product product) {
 
     }
 

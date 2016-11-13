@@ -1,8 +1,11 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 public class VendingMachine {
     private VendingMachineBank bank = new VendingMachineBank();
     private ButtonPanel buttons = new ButtonPanel();
     private Transaction transaction = new Transaction();
     private Screen screen = new Screen();
+    private CoinReturn coinReturn = new CoinReturn();
 
     public void insertCoin(Double value) {
         if(!bank.isMoneyValid(value)) {
@@ -14,8 +17,10 @@ public class VendingMachine {
     }
 
     public void pressButton(Product product) {
-        if(buttons.press(product, transaction)) {
-            bank.depositMoney(transaction);
+        Boolean transactionHasSufficientFundsForPurchase = buttons.press(product, transaction);
+        if(transactionHasSufficientFundsForPurchase) {
+            bank.depositMoney(transaction, product);
+            coinReturn.updateTotal(transaction.getTotal());
             transaction.clear();
         }
 

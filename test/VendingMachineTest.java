@@ -17,11 +17,14 @@ public class VendingMachineTest {
     @Mock private Product product;
     @Mock private ButtonPanel buttons;
     @Mock private Transaction transaction;
+    @Mock private CoinReturn coinReturn;
     private Double coin;
     private String expectedResult = "";
     private String actualResult = "";
     private List<Double> coins;
     private List<String> expectedResults;
+    private String name = "";
+    private Double price = 0.0;
 
     @Before
     public void setUp() {
@@ -107,7 +110,7 @@ public class VendingMachineTest {
         when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank).depositMoney(transaction);
+        verify(bank).depositMoney(transaction, product);
         verify(transaction).clear();
         verify(screen, times(2)).getDisplay();
         assertEquals(initialExpectedResult, initialActualResult);
@@ -130,7 +133,7 @@ public class VendingMachineTest {
         when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank, never()).depositMoney(transaction);
+        verify(bank, never()).depositMoney(transaction, product);
         verify(transaction, never()).clear();
         verify(screen).getDisplay();
         assertEquals(expectedResult, actualResult);
@@ -155,7 +158,7 @@ public class VendingMachineTest {
         when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank, never()).depositMoney(transaction);
+        verify(bank, never()).depositMoney(transaction, product);
         verify(transaction, never()).clear();
         verify(screen, times(2)).getDisplay();
         assertEquals(initialExpectedResult, initialActualResult);
@@ -164,6 +167,45 @@ public class VendingMachineTest {
 
     @Test
     public void WhenCustomerSelectsAProductWithNoMoneyInsertedThenProductPriceIsDisplayedAndThenInsertCoinIsDisplayed() {
+        String initialExpectedResult = Screen.PRICE + ": $1.00";
+        expectedResult = Screen.INSERT_COIN;
 
+        when(buttons.press(product, transaction)).thenReturn(false);
+        vendingMachine.pressButton(product);
+
+        when(screen.getDisplay()).thenReturn(initialExpectedResult);
+        String initialActualResult = vendingMachine.checkDisplay();
+        when(screen.getDisplay()).thenReturn(expectedResult);
+        actualResult = vendingMachine.checkDisplay();
+
+        verify(bank, never()).depositMoney(transaction, product);
+        verify(transaction, never()).clear();
+        verify(screen, times(2)).getDisplay();
+        assertEquals(initialExpectedResult, initialActualResult);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenAProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn() {
+        coin = .25;
+        int numberOfCoins = 5;
+        Double transactionFunds = 1.25;
+        Double productCost = 1.00;
+        Double extraFunds = transactionFunds - productCost;
+        Double expected = 0.25;
+
+        when(transaction.getTotal()).thenReturn(extraFunds);
+
+        for(int i=0;i<numberOfCoins;i++) {
+            vendingMachine.insertCoin(coin);
+        }
+
+        when(buttons.press(product, transaction)).thenReturn(true);
+        vendingMachine.pressButton(product);
+
+        verify(bank).depositMoney(transaction, product);
+        verify(coinReturn).updateTotal(extraFunds);
+        verify(transaction).clear();
+        assertEquals(expected, extraFunds);
     }
 }
