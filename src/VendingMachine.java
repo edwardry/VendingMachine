@@ -40,6 +40,7 @@ public class VendingMachine {
         if(transactionHasSufficientFundsForPurchase && productHasInventory) {
             bank.depositMoney(transaction, product);
             returnCoins();
+            determineDefaultMessage(bank);
         }
 
         screen.updateDisplay(transaction.getStatus());
