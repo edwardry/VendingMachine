@@ -24,8 +24,9 @@ public class VendingMachine {
         }
     }
 
-    public void insertCoin(Double value) {
-        if(!bank.isMoneyValid(value)) {
+    public void insertCoin(Coin coin) {
+        Double value = VendingMachineBank.determineValue(coin);
+        if(value.equals(Coin.VALUELESS)) {
             screen.updateDisplay(screen.getDefaultMessage());
             coinReturn.updateTotal(value);
         } else {

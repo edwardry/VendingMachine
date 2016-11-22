@@ -19,10 +19,10 @@ public class VendingMachineTest {
     @Mock private Transaction transaction;
     @Mock private CoinReturn coinReturn;
     @Mock private Inventory inventory;
-    private Double coin;
+    private Coin coin;
     private String expectedResult = "";
     private String actualResult = "";
-    private List<Double> coins;
+    private List<Coin> coins;
     private List<String> expectedResults;
     private String name = "";
     private Double price = 0.0;
@@ -39,66 +39,59 @@ public class VendingMachineTest {
 
     @Test
     public void WhenCustomerInsertsAValidCoinAsFirstTransactionInBankThenValueOfCoinIsDisplayedOnScreen() {
-        coin = .05;
+        coin = new Coin(CommonTestConstants.NICKEL_MASS, CommonTestConstants.NICKEL_DIAMETER);
         expectedResult = "$0.05";
 
-        when(bank.isMoneyValid(coin)).thenReturn(true);
         when(screen.getDisplay()).thenReturn(expectedResult);
 
         vendingMachine.insertCoin(coin);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank).isMoneyValid(coin);
-        verify(transaction).updateTotal(coin);
+        verify(transaction).updateTotal(any(Double.class));
         verify(screen).updateDisplay(transaction);
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void WhenCustomerInsertsAnInvalidCoinInBankThenScreenDisplaysInsertCoinAndCoinIsPlacedInCoinReturn() {
-        coin = .01;
+        coin = new Coin(2.5, 19.05);
         expectedResult = Screen.INSERT_COIN;
 
-        when(bank.isMoneyValid(coin)).thenReturn(false);
         when(screen.getDisplay()).thenReturn(expectedResult);
         when(screen.getDefaultMessage()).thenReturn(Screen.INSERT_COIN);
 
         vendingMachine.insertCoin(coin);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank).isMoneyValid(coin);
-        verify(coinReturn).updateTotal(coin);
+        verify(coinReturn).updateTotal(any(Double.class));
         verify(screen).updateDisplay(expectedResult);
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void WhenCustomerInsertsTwoValidCoinsInBankThenScreenDisplaysSumOfCoinValue() {
-        coins.add(0, .05);
+        coins.add(0, new Coin(CommonTestConstants.NICKEL_MASS, CommonTestConstants.NICKEL_DIAMETER));
         expectedResults.add(0, "$0.05");
-        coins.add(1, .10);
+        coins.add(1, new Coin(CommonTestConstants.DIME_MASS, CommonTestConstants.DIME_DIAMETER));
         expectedResults.add(1, "$0.15");
         int finalExpectedResult = coins.size() - 1;
 
-        for(Double coin : coins) {
+        for(Coin coin : coins) {
             int index = coins.indexOf(coin);
             when(screen.getDisplay()).thenReturn(expectedResults.get(index));
-            when(bank.isMoneyValid(coin)).thenReturn(true);
 
             vendingMachine.insertCoin(coin);
             actualResult = vendingMachine.checkDisplay();
-
-            verify(bank).isMoneyValid(coin);
-            verify(transaction).updateTotal(coin);
         }
 
+        verify(transaction, times(2)).updateTotal(any(Double.class));
         verify(screen, times(2)).updateDisplay(transaction);
         assertEquals(expectedResults.get(finalExpectedResult), actualResult);
     }
 
     @Test
     public void WhenSufficientMoneyAndProductSelectedThenDisplaysThankYouAndMoneyIsDepositedInBankAndTransactionReset() {
-        coin = .25;
+        coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 3;
         String initialExpectedResult = Screen.THANK_YOU;
         expectedResult = Screen.INSERT_COIN;
@@ -125,7 +118,7 @@ public class VendingMachineTest {
 
     @Test
     public void WhenInsufficientMoneyAndProductSelectedThenDisplaysPriceAndMoneyIsNotDeposited() {
-        coin = .25;
+        coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 3;
         expectedResult = Screen.PRICE + ": $1.00";
 
@@ -147,7 +140,7 @@ public class VendingMachineTest {
 
     @Test
     public void AfterPriceIsDisplayedDueToInsufficientFundsThenScreenDisplaysCurrentTransactionTotal() {
-        coin = .25;
+        coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 3;
         String initialExpectedResult = Screen.PRICE + ": $1.00";
         expectedResult = "$0.75";
@@ -193,14 +186,13 @@ public class VendingMachineTest {
 
     @Test
     public void WhenProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn() {
-        coin = .25;
+        coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 5;
         Double transactionFunds = 1.25;
         Double productCost = 1.00;
         Double extraFunds = transactionFunds - productCost;
         Double expected = 0.25;
 
-        when(bank.isMoneyValid(coin)).thenReturn(true);
         when(transaction.getTotal()).thenReturn(extraFunds);
 
         for(int i=0;i<numberOfCoins;i++) {
@@ -219,7 +211,7 @@ public class VendingMachineTest {
 
     @Test
     public void WhenCoinReturnButtonIsPressedThenTransactionTotalIsSentToCoinReturnAndScreenDisplaysInsertCoin() {
-        coin = .25;
+        coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 3;
         expectedResult = Screen.INSERT_COIN;
 
@@ -232,7 +224,7 @@ public class VendingMachineTest {
         when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(coinReturn, times(4)).updateTotal(any(Double.class));
+        verify(coinReturn).updateTotal(any(Double.class));
         verify(transaction).clear();
         verify(screen).getDisplay();
         assertEquals(expectedResult, actualResult);
@@ -240,7 +232,7 @@ public class VendingMachineTest {
 
     @Test
     public void WhenProductIsSelectedThatIsSoldOutThenDisplaysSoldOutAndThenTransactionTotalIsDisplayed() {
-        coin = .25;
+        coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 4;
         String initialExpectedResult = Screen.SOLD_OUT;
         expectedResult = "$1.00";
@@ -301,7 +293,7 @@ public class VendingMachineTest {
 
     @Test
     public void WhenVendingMachineIsNotAbleToMakeExactChangeThenCustomerDepositsCoinsAndNoLongerNeedsExactChange() {
-        coin = .25;
+        coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 4;
         expectedResult = Screen.EXACT_CHANGE;
 
