@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6781b93e-4b85-4577-825b-ed4ef6dd5369" name="Default" comment="Added more tests for determineCoinValue method">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/TransactionTest.java" />
+    <list default="true" id="6781b93e-4b85-4577-825b-ed4ef6dd5369" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Transaction.java" afterPath="$PROJECT_DIR$/src/Transaction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/VendingMachineBank.java" afterPath="$PROJECT_DIR$/src/VendingMachineBank.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/TransactionTest.java" afterPath="$PROJECT_DIR$/test/TransactionTest.java" />
     </list>
     <ignored path="VendingMachineKata.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,8 +50,8 @@
       <file leaf-file-name="TransactionTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/TransactionTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="249">
+              <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#268#269#0" expanded="true" />
@@ -694,7 +692,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479781662598</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="updating the total of a transaction tests added">
+      <created>1479782694305</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1479782694305</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -713,14 +718,14 @@
     <history-entry file="All_in_VendingMachineKata - 2016.11.21 at 21h 44m 19s.xml">
       <configuration name="All in VendingMachineKata" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="All_in_VendingMachineKata - 2016.11.21 at 21h 46m 30s.xml">
+      <configuration name="All in VendingMachineKata" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_VendingMachineKata - 2016.11.21 at 21h 46m 50s.xml">
+      <configuration name="All in VendingMachineKata" configurationId="JUnit" />
+    </history-entry>
     <history-entry file="VendingMachineBankTest - 2016.11.21 at 21h 19m 53s.xml">
       <configuration name="VendingMachineBankTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="VendingMachineTest - 2016.11.21 at 21h 13m 17s.xml">
-      <configuration name="VendingMachineTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="VendingMachineTest - 2016.11.21 at 21h 15m 51s.xml">
-      <configuration name="VendingMachineTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="VendingMachineTest - 2016.11.21 at 21h 17m 22s.xml">
       <configuration name="VendingMachineTest" configurationId="JUnit" />
@@ -786,7 +791,8 @@
     <MESSAGE value="Added test for updating the state of whether or not the vending machine requires exact change after a customer inserts additional coins" />
     <MESSAGE value="Refactored the project to use Coin objects instead of double values. Coins have mass, diameter, and value. Coins that are valid to the vending machine are defined in the ValidCoins class. Theoretically ValidCoins could be modified to read in the specifications of valid coins from a text file or from a database such that the valid coins could be updated periodically or for any vending machine." />
     <MESSAGE value="Added more tests for determineCoinValue method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added more tests for determineCoinValue method" />
+    <MESSAGE value="updating the total of a transaction tests added" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating the total of a transaction tests added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1141,8 +1147,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/TransactionTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="249">
+          <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#268#269#0" expanded="true" />
