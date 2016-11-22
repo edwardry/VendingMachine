@@ -6,10 +6,6 @@ public class VendingMachineBank {
 
     }
 
-    public Boolean isMoneyValid(Coin value) {
-        return true;
-    }
-
     public boolean hasSufficientChange(Inventory inventory) {
         return true;
     }

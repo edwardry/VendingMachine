@@ -2,8 +2,12 @@ public class Transaction {
     private Double total;
     private String status;
 
+    public Transaction() {
+        total = 0.0;
+    }
+
     public void updateTotal(Double value) {
-        this.total = value;
+        this.total += value;
     }
 
     public String getStatus() {
