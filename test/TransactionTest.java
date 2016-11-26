@@ -36,10 +36,19 @@ public class TransactionTest {
     }
 
     @Test
-    public void WhenANonEmptyTransactionHasBeenClearedThenTheNewTotalIsZero() {
+    public void WhenANonEmptyTransactionIsClearedThenTheNewTotalIsZero() {
         expectedResult = 0.0;
 
         transaction.updateTotal(0.95);
+        transaction.clear();
+        actualResult = transaction.getTotal();
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenAnEmptyTransactionIsClearedThenTheTotalRemainsZero() {
+        expectedResult = transaction.getTotal();
         transaction.clear();
         actualResult = transaction.getTotal();
 
