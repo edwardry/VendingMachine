@@ -8,7 +8,7 @@ public class Screen {
     private String defaultMessage = "INSERT COIN";
 
     public void updateDisplay(Transaction transaction) {
-
+        display = CoinUtil.convertValueToString(transaction.getTotal());
     }
 
     public void updateDisplay(String text) {
