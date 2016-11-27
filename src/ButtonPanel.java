@@ -8,7 +8,7 @@ public class ButtonPanel {
             transaction.setStatus(Screen.THANK_YOU);
             return true;
         } else {
-            transaction.setStatus(Screen.PRICE + ": " + CoinUtil.convertValueToString(transactionTotal));
+            transaction.setStatus(Screen.PRICE + ": " + CoinUtil.convertValueToString(product.getPrice()));
             return false;
         }
     }

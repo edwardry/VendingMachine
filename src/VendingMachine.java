@@ -67,6 +67,7 @@ public class VendingMachine {
     public void returnCoins() {
         coinReturn.updateTotal(CoinUtil.getTotal(transaction));
         transaction.clear();
+        screen.updateDisplay(screen.getDefaultMessage());
     }
 
     public void removeCoinsFromCoinReturn() {

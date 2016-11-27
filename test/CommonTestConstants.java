@@ -11,4 +11,7 @@ public class CommonTestConstants {
     public static final Double QUARTER_DIAMETER = 24.26;
     public static final Double QUARTER_VALUE = 0.25;
     public static final Coin quarter = new Coin(QUARTER_MASS, QUARTER_DIAMETER, QUARTER_VALUE);
+    public static final String COLA = "Cola";
+    public static final String CHIPS = "Chips";
+    public static final String CANDY = "Candy";
 }

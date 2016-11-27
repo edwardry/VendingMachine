@@ -3,6 +3,12 @@ public class Product {
     private Double price;
     private Integer count;
 
+    public Product() {
+        name = "";
+        price = 0.0;
+        count = 0;
+    }
+
     public Product(String name, Double price, Integer count) {
         this.name = name;
         this.price = price;

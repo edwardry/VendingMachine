@@ -1,42 +1,30 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 public class VendingMachineTest {
-    @InjectMocks private VendingMachine vendingMachine;
-    @Mock private VendingMachineBank bank;
-    @Mock private Screen screen;
-    @Mock private Product product;
-    @Mock private ButtonPanel buttons;
-    @Mock private Transaction transaction;
-    @Mock private CoinReturn coinReturn;
-    @Mock private Inventory inventory;
+    private VendingMachine vendingMachine;
+    private VendingMachineBank bank;
+    private Product product;
+    private Inventory inventory;
     private Coin coin;
     private String expectedResult = "";
     private String actualResult = "";
     private List<Coin> coins;
     private List<String> expectedResults;
-    private String name = "";
-    private Double price = 0.0;
 
     @Before
     public void setUp() {
-        bank = new VendingMachineBank();
-        Product cola = new Product("Cola", 1.00, 10);
-        Product chips = new Product("Chips", 0.50, 10);
-        Product candy = new Product("Candy", 0.65, 10);
+        Map<Double, List<Coin>> bankFunds = TestUtil.createBankFunds();
+        bank = new VendingMachineBank(bankFunds);
+        Product cola = new Product(CommonTestConstants.COLA, 1.00, 10);
+        Product chips = new Product(CommonTestConstants.CHIPS, 0.50, 10);
+        Product candy = new Product(CommonTestConstants.CANDY, 0.65, 10);
         inventory = new Inventory(Arrays.asList(cola, chips, candy));
         vendingMachine = new VendingMachine(bank, inventory);
-        MockitoAnnotations.initMocks(this);
         coins = new ArrayList<>();
         expectedResults = new ArrayList<>();
     }
@@ -46,13 +34,9 @@ public class VendingMachineTest {
         coin = new Coin(CommonTestConstants.NICKEL_MASS, CommonTestConstants.NICKEL_DIAMETER);
         expectedResult = "$0.05";
 
-        when(screen.getDisplay()).thenReturn(expectedResult);
-
         vendingMachine.insertCoin(coin);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(transaction).update(any(Coin.class));
-        verify(screen).updateDisplay(transaction);
         assertEquals(expectedResult, actualResult);
     }
 
@@ -61,13 +45,9 @@ public class VendingMachineTest {
         coin = new Coin(2.5, 19.05);
         expectedResult = Screen.INSERT_COIN;
 
-        when(screen.getDisplay()).thenReturn(expectedResult);
-        when(screen.getDefaultMessage()).thenReturn(Screen.INSERT_COIN);
-
         vendingMachine.insertCoin(coin);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(screen, times(2)).updateDisplay(expectedResult);
         assertEquals(expectedResult, actualResult);
     }
 
@@ -79,16 +59,11 @@ public class VendingMachineTest {
         expectedResults.add(1, "$0.15");
         int finalExpectedResult = coins.size() - 1;
 
-        for(Coin coin : coins) {
-            int index = coins.indexOf(coin);
-            when(screen.getDisplay()).thenReturn(expectedResults.get(index));
-
+        for (Coin coin : coins) {
             vendingMachine.insertCoin(coin);
             actualResult = vendingMachine.checkDisplay();
         }
 
-        verify(transaction, times(2)).update(any(Coin.class));
-        verify(screen, times(2)).updateDisplay(transaction);
         assertEquals(expectedResults.get(finalExpectedResult), actualResult);
     }
 
@@ -96,25 +71,19 @@ public class VendingMachineTest {
     public void WhenSufficientMoneyAndProductSelectedThenDisplaysThankYouAndMoneyIsDepositedInBankAndTransactionReset() {
         coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 3;
+        product = inventory.getProduct(CommonTestConstants.CHIPS);
         String initialExpectedResult = Screen.THANK_YOU;
         expectedResult = Screen.INSERT_COIN;
 
-        for(int i=0;i<numberOfCoins;i++) {
+        for (int i = 0; i < numberOfCoins; i++) {
             vendingMachine.insertCoin(coin);
         }
 
-        when(buttons.press(product, transaction)).thenReturn(true);
-        when(product.hasInventory()).thenReturn(true);
         vendingMachine.pressButton(product);
 
-        when(screen.getDisplay()).thenReturn(initialExpectedResult);
         String initialActualResult = vendingMachine.checkDisplay();
-        when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank).depositMoney(transaction, product);
-        verify(transaction).clear();
-        verify(screen, times(2)).getDisplay();
         assertEquals(initialExpectedResult, initialActualResult);
         assertEquals(expectedResult, actualResult);
     }
@@ -123,21 +92,16 @@ public class VendingMachineTest {
     public void WhenInsufficientMoneyAndProductSelectedThenDisplaysPriceAndMoneyIsNotDeposited() {
         coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 3;
+        product = inventory.getProduct(CommonTestConstants.COLA);
         expectedResult = Screen.PRICE + ": $1.00";
 
-        for(int i=0;i<numberOfCoins;i++) {
+        for (int i = 0; i < numberOfCoins; i++) {
             vendingMachine.insertCoin(coin);
         }
 
-        when(buttons.press(product, transaction)).thenReturn(false);
         vendingMachine.pressButton(product);
-
-        when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank, never()).depositMoney(transaction, product);
-        verify(transaction, never()).clear();
-        verify(screen).getDisplay();
         assertEquals(expectedResult, actualResult);
     }
 
@@ -145,24 +109,19 @@ public class VendingMachineTest {
     public void AfterPriceIsDisplayedDueToInsufficientFundsThenScreenDisplaysCurrentTransactionTotal() {
         coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 3;
+        product = inventory.getProduct(CommonTestConstants.COLA);
         String initialExpectedResult = Screen.PRICE + ": $1.00";
         expectedResult = "$0.75";
 
-        for(int i=0;i<numberOfCoins;i++) {
+        for (int i = 0; i < numberOfCoins; i++) {
             vendingMachine.insertCoin(coin);
         }
 
-        when(buttons.press(product, transaction)).thenReturn(false);
         vendingMachine.pressButton(product);
 
-        when(screen.getDisplay()).thenReturn(initialExpectedResult);
         String initialActualResult = vendingMachine.checkDisplay();
-        when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank, never()).depositMoney(transaction, product);
-        verify(transaction, never()).clear();
-        verify(screen, times(2)).getDisplay();
         assertEquals(initialExpectedResult, initialActualResult);
         assertEquals(expectedResult, actualResult);
     }
@@ -170,19 +129,14 @@ public class VendingMachineTest {
     @Test
     public void WhenCustomerSelectsAProductWithNoMoneyInsertedThenProductPriceIsDisplayedAndThenInsertCoinIsDisplayed() {
         String initialExpectedResult = Screen.PRICE + ": $1.00";
+        product = inventory.getProduct(CommonTestConstants.COLA);
         expectedResult = Screen.INSERT_COIN;
 
-        when(buttons.press(product, transaction)).thenReturn(false);
         vendingMachine.pressButton(product);
 
-        when(screen.getDisplay()).thenReturn(initialExpectedResult);
         String initialActualResult = vendingMachine.checkDisplay();
-        when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank, never()).depositMoney(transaction, product);
-        verify(transaction, never()).clear();
-        verify(screen, times(2)).getDisplay();
         assertEquals(initialExpectedResult, initialActualResult);
         assertEquals(expectedResult, actualResult);
     }
@@ -191,22 +145,18 @@ public class VendingMachineTest {
     public void WhenProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn() {
         coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 5;
+        product = inventory.getProduct(CommonTestConstants.COLA);
         Double transactionFunds = 1.25;
-        Double productCost = 1.00;
+        Double productCost = product.getPrice();
         Double extraFunds = transactionFunds - productCost;
         Double expected = 0.25;
 
-        for(int i=0;i<numberOfCoins;i++) {
+        for (int i = 0; i < numberOfCoins; i++) {
             vendingMachine.insertCoin(coin);
         }
 
-        when(buttons.press(product, transaction)).thenReturn(true);
-        when(product.hasInventory()).thenReturn(true);
         vendingMachine.pressButton(product);
 
-        verify(bank).depositMoney(transaction, product);
-        verify(coinReturn).updateTotal(any(Double.class));
-        verify(transaction).clear();
         assertEquals(expected, extraFunds);
     }
 
@@ -216,18 +166,14 @@ public class VendingMachineTest {
         int numberOfCoins = 3;
         expectedResult = Screen.INSERT_COIN;
 
-        for(int i=0;i<numberOfCoins;i++) {
+        for (int i = 0; i < numberOfCoins; i++) {
             vendingMachine.insertCoin(coin);
         }
 
         vendingMachine.returnCoins();
 
-        when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(coinReturn).updateTotal(any(Double.class));
-        verify(transaction).clear();
-        verify(screen).getDisplay();
         assertEquals(expectedResult, actualResult);
     }
 
@@ -235,92 +181,39 @@ public class VendingMachineTest {
     public void WhenProductIsSelectedThatIsSoldOutThenDisplaysSoldOutAndThenTransactionTotalIsDisplayed() {
         coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
         int numberOfCoins = 4;
+        List<Product> products = Arrays.asList(new Product(CommonTestConstants.CANDY, 0.65, 0));
+        Inventory inventory = new Inventory(products);
+        product = inventory.getProduct(CommonTestConstants.CANDY);
         String initialExpectedResult = Screen.SOLD_OUT;
         expectedResult = "$1.00";
 
-        for(int i=0;i<numberOfCoins;i++) {
+        for (int i = 0; i < numberOfCoins; i++) {
             vendingMachine.insertCoin(coin);
         }
 
-        when(buttons.press(product, transaction)).thenReturn(true);
-        when(product.hasInventory()).thenReturn(false);
         vendingMachine.pressButton(product);
 
-        when(screen.getDisplay()).thenReturn(initialExpectedResult);
         String initialActualResult = vendingMachine.checkDisplay();
-        when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank, never()).depositMoney(transaction, product);
-        verify(transaction, never()).clear();
-        verify(screen, times(2)).getDisplay();
         assertEquals(initialExpectedResult, initialActualResult);
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void WhenProductIsSelectedThatIsSoldOutAndTransactionTotalIsEmptyThenScreenDisplaysSoldOutAndThenInsertCoin() {
+        List<Product> products = Arrays.asList(new Product(CommonTestConstants.CANDY, 0.65, 0));
+        Inventory inventory = new Inventory(products);
+        product = inventory.getProduct(CommonTestConstants.CANDY);
         String initialExpectedResult = Screen.SOLD_OUT;
         expectedResult = Screen.INSERT_COIN;
 
-        when(buttons.press(product, transaction)).thenReturn(false);
-        when(product.hasInventory()).thenReturn(false);
         vendingMachine.pressButton(product);
 
-        when(screen.getDisplay()).thenReturn(initialExpectedResult);
         String initialActualResult = vendingMachine.checkDisplay();
-        when(screen.getDisplay()).thenReturn(expectedResult);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(bank, never()).depositMoney(transaction, product);
-        verify(transaction, never()).clear();
-        verify(screen, times(2)).getDisplay();
         assertEquals(initialExpectedResult, initialActualResult);
-        assertEquals(expectedResult, actualResult);
-    }
-
-    @Test
-    public void WhenVendingMachineIsNotAbleToMakeExactChangeForAnyProductThenExactChangeOnlyIsDisplayedInsteadOfInsertCoin() {
-        expectedResult = Screen.EXACT_CHANGE;
-
-        when(bank.hasSufficientChange(inventory)).thenReturn(false);
-        VendingMachine newMachine = new VendingMachine(bank, inventory);
-
-        when(screen.getDisplay()).thenReturn(Screen.EXACT_CHANGE);
-        actualResult = vendingMachine.checkDisplay();
-
-        assertEquals(expectedResult, actualResult);
-    }
-
-    @Test
-    public void WhenVendingMachineIsNotAbleToMakeExactChangeThenCustomerDepositsCoinsAndNoLongerNeedsExactChange() {
-        coin = new Coin(CommonTestConstants.QUARTER_MASS, CommonTestConstants.QUARTER_DIAMETER);
-        int numberOfCoins = 4;
-        expectedResult = Screen.EXACT_CHANGE;
-
-        when(bank.hasSufficientChange(inventory)).thenReturn(false);
-        when(screen.getDisplay()).thenReturn(Screen.EXACT_CHANGE);
-        VendingMachine newMachine = new VendingMachine(bank, inventory);
-
-        actualResult = vendingMachine.checkDisplay();
-        assertEquals(expectedResult, actualResult);
-
-        for(int i=0;i<numberOfCoins;i++) {
-            newMachine.insertCoin(coin);
-        }
-
-        expectedResult = Screen.THANK_YOU;
-        when(bank.hasSufficientChange(inventory)).thenReturn(true);
-        when(screen.getDisplay()).thenReturn(Screen.THANK_YOU);
-
-        newMachine.pressButton(product);
-        actualResult = vendingMachine.checkDisplay();
-        assertEquals(expectedResult, actualResult);
-
-        expectedResult = Screen.INSERT_COIN;
-        when(screen.getDisplay()).thenReturn(Screen.INSERT_COIN);
-
-        actualResult = vendingMachine.checkDisplay();
         assertEquals(expectedResult, actualResult);
     }
 }

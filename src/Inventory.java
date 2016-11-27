@@ -15,4 +15,14 @@ public class Inventory {
     public List<Product> getProducts() {
         return products;
     }
+
+    public Product getProduct(String name) {
+        for(Product product : products) {
+            if(product.getName().equals(name)) {
+                return product;
+            }
+        }
+
+        return new Product();
+    }
 }
