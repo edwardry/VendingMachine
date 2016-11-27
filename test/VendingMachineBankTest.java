@@ -115,4 +115,15 @@ public class VendingMachineBankTest {
 
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void WhenDepositingMoneyFromATransactionWithABalanceButProductHasNoPriceThenNothingIsDeposited() {
+        expectedResult = CoinUtil.getTotal(transaction);
+        Product freeProduct = new Product("Chips", 0.00, 1);
+
+        bank.depositMoney(transaction, freeProduct);
+        actualResult = CoinUtil.getTotal(transaction);
+
+        assertEquals(expectedResult, actualResult);
+    }
 }
