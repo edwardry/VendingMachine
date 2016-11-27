@@ -28,7 +28,6 @@ public class VendingMachine {
         Double value = VendingMachineBank.determineValue(coin);
         if(value.equals(Coin.VALUELESS)) {
             screen.updateDisplay(screen.getDefaultMessage());
-            coinReturn.updateTotal(value);
         } else {
             transaction.updateTotal(value);
             screen.updateDisplay(transaction);
@@ -54,5 +53,9 @@ public class VendingMachine {
     public void returnCoins() {
         coinReturn.updateTotal(transaction.getTotal());
         transaction.clear();
+    }
+
+    public void removeCoinsFromCoinReturn() {
+        coinReturn.takeCoins();
     }
 }

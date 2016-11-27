@@ -1,6 +1,11 @@
 public class CoinReturn {
-    Double total;
+    private Double total = 0.0;
 
     public void updateTotal(Double value) {
+        total += value;
+    }
+
+    public void takeCoins() {
+        total = 0.0;
     }
 }
