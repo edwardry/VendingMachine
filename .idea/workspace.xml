@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6781b93e-4b85-4577-825b-ed4ef6dd5369" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/TestUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ButtonPanel.java" afterPath="$PROJECT_DIR$/src/ButtonPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CoinUtil.java" afterPath="$PROJECT_DIR$/src/CoinUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inventory.java" afterPath="$PROJECT_DIR$/src/Inventory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Screen.java" afterPath="$PROJECT_DIR$/src/Screen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Transaction.java" afterPath="$PROJECT_DIR$/src/Transaction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/VendingMachine.java" afterPath="$PROJECT_DIR$/src/VendingMachine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/VendingMachineBank.java" afterPath="$PROJECT_DIR$/src/VendingMachineBank.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/ButtonPanelTest.java" afterPath="$PROJECT_DIR$/test/ButtonPanelTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/CommonTestConstants.java" afterPath="$PROJECT_DIR$/test/CommonTestConstants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/ScreenTest.java" afterPath="$PROJECT_DIR$/test/ScreenTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/TransactionTest.java" afterPath="$PROJECT_DIR$/test/TransactionTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/VendingMachineBankTest.java" afterPath="$PROJECT_DIR$/test/VendingMachineBankTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/VendingMachineTest.java" afterPath="$PROJECT_DIR$/test/VendingMachineTest.java" />
     </list>
     <ignored path="VendingMachineKata.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,8 +61,8 @@
       <file leaf-file-name="VendingMachineBankTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/VendingMachineBankTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+            <state relative-caret-position="317">
+              <caret line="105" column="49" selection-start-line="105" selection-start-column="49" selection-end-line="105" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -744,7 +731,14 @@
       <option name="project" value="LOCAL" />
       <updated>1480207246993</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="A lot of changes in this commit. Probably my biggest commit in one change yet. There were some structural issues I discovered when trying to work out the bank deposit functionality. I ended up having to refactor how transactions and the bank keeps track of the money it is handling. Went from Double total to keeping track of how many of each type of coin is available.">
+      <created>1480282561710</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1480282561710</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -752,6 +746,9 @@
       <configuration name="All in VendingMachineKata" configurationId="JUnit" />
     </history-entry>
     <history-entry file="All_in_VendingMachineKata - 2016.11.27 at 16h 32m 58s.xml">
+      <configuration name="All in VendingMachineKata" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_VendingMachineKata - 2016.11.27 at 16h 45m 24s.xml">
       <configuration name="All in VendingMachineKata" configurationId="JUnit" />
     </history-entry>
     <history-entry file="VendingMachineBankTest_WhenDepositMoneyIsPassedATransactionWithTotalSameAsProductThenAllMoneyInTheTransactionIsDeposited - 2016.11.27 at 16h 07m 30s.xml">
@@ -775,9 +772,6 @@
     <history-entry file="VendingMachineBankTest_WhenDepositMoneyIsPassedATransactionWithTotalSameAsProductThenAllMoneyInTheTransactionIsDeposited - 2016.11.27 at 16h 32m 34s.xml">
       <configuration name="VendingMachineBankTest.WhenDepositMoneyIsPassedATransactionWithTotalSameAsProductThenAllMoneyInTheTransactionIsDeposited" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="VendingMachineTest_WhenProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn - 2016.11.27 at 16h 03m 48s.xml">
-      <configuration name="VendingMachineTest.WhenProductIsSelectedThatCostsLessThanTransactionTotalThenRemainingTotalAfterPurchaseIsPlacedInCoinReturn" configurationId="JUnit" />
-    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -790,7 +784,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3371522" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3371522" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -843,7 +837,8 @@
     <MESSAGE value="Pressing button for product with exact amount in transaction results in true being returned and the status of the transaction being set to THANK YOU" />
     <MESSAGE value="Pressing button with more than enough change to buy product results in true being returned and pressing button without enough change to buy product results in false being returned" />
     <MESSAGE value="Modifications to update the Screen based on transaction amount after the display is checked." />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifications to update the Screen based on transaction amount after the display is checked." />
+    <MESSAGE value="A lot of changes in this commit. Probably my biggest commit in one change yet. There were some structural issues I discovered when trying to work out the bank deposit functionality. I ended up having to refactor how transactions and the bank keeps track of the money it is handling. Went from Double total to keeping track of how many of each type of coin is available." />
+    <option name="LAST_COMMIT_MESSAGE" value="A lot of changes in this commit. Probably my biggest commit in one change yet. There were some structural issues I discovered when trying to work out the bank deposit functionality. I ended up having to refactor how transactions and the bank keeps track of the money it is handling. Went from Double total to keeping track of how many of each type of coin is available." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1312,8 +1307,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/VendingMachineBankTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+        <state relative-caret-position="317">
+          <caret line="105" column="49" selection-start-line="105" selection-start-column="49" selection-end-line="105" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

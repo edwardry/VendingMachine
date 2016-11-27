@@ -96,6 +96,13 @@ public class VendingMachineBankTest {
     }
 
     @Test
-    public void WhenDepositMoneyIsPassedATransactionWithTotalMoreThanProductThenRemainingMoneyIsSentToCoinReturn() {
+    public void WhenDepositMoneyIsPassedATransactionWithTotalMoreThanProductThenRemainingMoneyIsStillInTransaction() {
+        TestUtil.addCoins(8, CommonTestConstants.quarter, transaction);
+        expectedResult = CoinUtil.getTotal(transaction) - 1.00;
+
+        bank.depositMoney(transaction, product);
+        actualResult = CoinUtil.getTotal(transaction);
+
+        assertEquals(expectedResult, actualResult);
     }
 }
