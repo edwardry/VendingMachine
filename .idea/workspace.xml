@@ -61,8 +61,8 @@
       <file leaf-file-name="VendingMachineBankTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/VendingMachineBankTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="105" column="49" selection-start-line="105" selection-start-column="49" selection-end-line="105" selection-end-column="49" />
+            <state relative-caret-position="198">
+              <caret line="115" column="49" selection-start-line="115" selection-start-column="49" selection-end-line="115" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -738,17 +738,24 @@
       <option name="project" value="LOCAL" />
       <updated>1480282561710</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Depositing money into bank with more than enough for the product price in the transaction results in only the price of the product being removed from transaction">
+      <created>1480283204526</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1480283204526</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_VendingMachineKata - 2016.11.27 at 16h 04m 50s.xml">
-      <configuration name="All in VendingMachineKata" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="All_in_VendingMachineKata - 2016.11.27 at 16h 32m 58s.xml">
       <configuration name="All in VendingMachineKata" configurationId="JUnit" />
     </history-entry>
     <history-entry file="All_in_VendingMachineKata - 2016.11.27 at 16h 45m 24s.xml">
+      <configuration name="All in VendingMachineKata" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_VendingMachineKata - 2016.11.27 at 16h 48m 46s.xml">
       <configuration name="All in VendingMachineKata" configurationId="JUnit" />
     </history-entry>
     <history-entry file="VendingMachineBankTest_WhenDepositMoneyIsPassedATransactionWithTotalSameAsProductThenAllMoneyInTheTransactionIsDeposited - 2016.11.27 at 16h 07m 30s.xml">
@@ -775,7 +782,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -813,7 +820,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added first test to insert a single valid coin using unitils to mock results. Also did some refactoring on names of classes. Wanted the Bank interface to feel more like it could be used for any type of bank. Also changed BankImpl Class to VendingMachineBank mostly because I think it is a better description." />
     <MESSAGE value="Refactored how I am testing and setting up the overall structure of this project. I created a VendingMachine class that will do all of the high level customer interactions and will use methods from classes like VendingMachineBank. I think this makes more sense because now all of my mocked out testing will be done in VendingMachineTest for all of the services that the VendingMachine class uses and later after I have every underlying service built out for VendingMachine I will start implementing the underlying services with their own test files." />
     <MESSAGE value="Changed my mocking library from unitils to mockito. After discovering the mockito library I found that I liked the syntax and dependency injection capabilities more than unitils." />
     <MESSAGE value="Added test for multiple valid coins being added into the vending machine" />
@@ -838,7 +844,8 @@
     <MESSAGE value="Pressing button with more than enough change to buy product results in true being returned and pressing button without enough change to buy product results in false being returned" />
     <MESSAGE value="Modifications to update the Screen based on transaction amount after the display is checked." />
     <MESSAGE value="A lot of changes in this commit. Probably my biggest commit in one change yet. There were some structural issues I discovered when trying to work out the bank deposit functionality. I ended up having to refactor how transactions and the bank keeps track of the money it is handling. Went from Double total to keeping track of how many of each type of coin is available." />
-    <option name="LAST_COMMIT_MESSAGE" value="A lot of changes in this commit. Probably my biggest commit in one change yet. There were some structural issues I discovered when trying to work out the bank deposit functionality. I ended up having to refactor how transactions and the bank keeps track of the money it is handling. Went from Double total to keeping track of how many of each type of coin is available." />
+    <MESSAGE value="Depositing money into bank with more than enough for the product price in the transaction results in only the price of the product being removed from transaction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Depositing money into bank with more than enough for the product price in the transaction results in only the price of the product being removed from transaction" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1307,8 +1314,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/VendingMachineBankTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="105" column="49" selection-start-line="105" selection-start-column="49" selection-end-line="105" selection-end-column="49" />
+        <state relative-caret-position="198">
+          <caret line="115" column="49" selection-start-line="115" selection-start-column="49" selection-end-line="115" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

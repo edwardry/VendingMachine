@@ -105,4 +105,14 @@ public class VendingMachineBankTest {
 
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void WhenAttemptingToDepositATransactionWithNoMoneyThenNothingIsDeposited() {
+        expectedResult = CoinUtil.getTotal(transaction);
+
+        bank.depositMoney(transaction, product);
+        actualResult = CoinUtil.getTotal(transaction);
+
+        assertEquals(expectedResult, actualResult);
+    }
 }
