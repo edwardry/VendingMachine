@@ -26,4 +26,26 @@ public class ButtonPanelTest {
 
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void WhenTransactionHasMoreThanEnoughCoinsToBuyProductThenPressingButtonReturnsTrue() {
+        expectedResult = true;
+        product = new Product("Cola", 1.00, 1);
+        transaction.updateTotal(2.00);
+
+        actualResult = buttons.press(product, transaction);
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenTransactionDoesNotHaveEnoughCoinsToBuyProductThenPressingButtonReturnsFalse() {
+        expectedResult = false;
+        product = new Product("Cola", 1.00, 1);
+        transaction.updateTotal(0.95);
+
+        actualResult = buttons.press(product, transaction);
+
+        assertEquals(expectedResult, actualResult);
+    }
 }
