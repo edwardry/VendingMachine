@@ -1,13 +1,24 @@
+import java.util.*;
+
 public class Transaction {
-    private Double total;
+    private Map<Double, List<Coin>> coins;
     private String status;
 
     public Transaction() {
-        total = 0.0;
+        coins = new HashMap<>();
     }
 
-    public void updateTotal(Double value) {
-        this.total += value;
+    public Map<Double, List<Coin>> getCoins() {
+        return coins;
+    }
+
+    public void update(Coin coin) {
+        CoinUtil.store(coin, coins);
+    }
+
+    public void remove(Double value) {
+        List<Coin> coinsAtValue = coins.get(value);
+        coinsAtValue.remove(0);
     }
 
     public String getStatus() {
@@ -19,10 +30,6 @@ public class Transaction {
     }
 
     public void clear() {
-        total = 0.0;
-    }
-
-    public Double getTotal() {
-        return total;
+        coins.clear();
     }
 }

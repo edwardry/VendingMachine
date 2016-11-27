@@ -17,8 +17,8 @@ public class TransactionTest {
     public void WhenANewTransactionHasItsTotalUpdatedTheNewTotalIsTheValueThatWasPassed() {
         expectedResult = 0.25;
 
-        transaction.updateTotal(0.25);
-        actualResult = transaction.getTotal();
+        transaction.update(CommonTestConstants.quarter);
+        actualResult = CoinUtil.getTotal(transaction);
 
         assertEquals(expectedResult, actualResult);
     }
@@ -27,10 +27,10 @@ public class TransactionTest {
     public void WhenANonEmptyTransactionHasItsTotalUpdatedTheNewTotalIsTheSumOfThePreviousTotalPlusTheNewlyPassedValue() {
         expectedResult = 1.00;
 
-        transaction.updateTotal(0.95);
-
-        transaction.updateTotal(0.05);
-        actualResult = transaction.getTotal();
+        TestUtil.addCoins(3, CommonTestConstants.quarter, transaction);
+        TestUtil.addCoins(2, CommonTestConstants.dime, transaction);
+        transaction.update(CommonTestConstants.nickel);
+        actualResult = CoinUtil.getTotal(transaction);
 
         assertEquals(expectedResult, actualResult);
     }
@@ -38,19 +38,19 @@ public class TransactionTest {
     @Test
     public void WhenANonEmptyTransactionIsClearedThenTheNewTotalIsZero() {
         expectedResult = 0.0;
-
-        transaction.updateTotal(0.95);
+        TestUtil.addCoins(3, CommonTestConstants.quarter, transaction);
+        TestUtil.addCoins(2, CommonTestConstants.dime, transaction);
         transaction.clear();
-        actualResult = transaction.getTotal();
+        actualResult = CoinUtil.getTotal(transaction);
 
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void WhenAnEmptyTransactionIsClearedThenTheTotalRemainsZero() {
-        expectedResult = transaction.getTotal();
+        expectedResult = CoinUtil.getTotal(transaction);
         transaction.clear();
-        actualResult = transaction.getTotal();
+        actualResult = CoinUtil.getTotal(transaction);
 
         assertEquals(expectedResult, actualResult);
     }

@@ -26,10 +26,11 @@ public class VendingMachine {
 
     public void insertCoin(Coin coin) {
         Double value = VendingMachineBank.determineValue(coin);
+        coin.setValue(value);
         if(value.equals(Coin.VALUELESS)) {
             screen.updateDisplay(screen.getDefaultMessage());
         } else {
-            transaction.updateTotal(value);
+            transaction.update(coin);
             screen.updateDisplay(transaction);
         }
     }
@@ -55,7 +56,7 @@ public class VendingMachine {
     }
 
     private void determineNewDisplay(Transaction transaction) {
-        if(transaction.getTotal().equals(0.0)) {
+        if(CoinUtil.getTotal(transaction).equals(0.0)) {
             screen.updateDisplay(screen.getDefaultMessage());
         } else {
             screen.updateDisplay(transaction);
@@ -64,7 +65,7 @@ public class VendingMachine {
     }
 
     public void returnCoins() {
-        coinReturn.updateTotal(transaction.getTotal());
+        coinReturn.updateTotal(CoinUtil.getTotal(transaction));
         transaction.clear();
     }
 

@@ -5,6 +5,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -30,7 +31,10 @@ public class VendingMachineTest {
     @Before
     public void setUp() {
         bank = new VendingMachineBank();
-        inventory = new Inventory();
+        Product cola = new Product("Cola", 1.00, 10);
+        Product chips = new Product("Chips", 0.50, 10);
+        Product candy = new Product("Candy", 0.65, 10);
+        inventory = new Inventory(Arrays.asList(cola, chips, candy));
         vendingMachine = new VendingMachine(bank, inventory);
         MockitoAnnotations.initMocks(this);
         coins = new ArrayList<>();
@@ -47,7 +51,7 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(coin);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(transaction).updateTotal(any(Double.class));
+        verify(transaction).update(any(Coin.class));
         verify(screen).updateDisplay(transaction);
         assertEquals(expectedResult, actualResult);
     }
@@ -83,7 +87,7 @@ public class VendingMachineTest {
             actualResult = vendingMachine.checkDisplay();
         }
 
-        verify(transaction, times(2)).updateTotal(any(Double.class));
+        verify(transaction, times(2)).update(any(Coin.class));
         verify(screen, times(2)).updateDisplay(transaction);
         assertEquals(expectedResults.get(finalExpectedResult), actualResult);
     }
@@ -192,8 +196,6 @@ public class VendingMachineTest {
         Double extraFunds = transactionFunds - productCost;
         Double expected = 0.25;
 
-        when(transaction.getTotal()).thenReturn(extraFunds);
-
         for(int i=0;i<numberOfCoins;i++) {
             vendingMachine.insertCoin(coin);
         }
@@ -203,7 +205,7 @@ public class VendingMachineTest {
         vendingMachine.pressButton(product);
 
         verify(bank).depositMoney(transaction, product);
-        verify(coinReturn).updateTotal(extraFunds);
+        verify(coinReturn).updateTotal(any(Double.class));
         verify(transaction).clear();
         assertEquals(expected, extraFunds);
     }

@@ -11,4 +11,8 @@ public class Inventory {
     public Inventory(List<Product> products) {
         this.products = products;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
 }

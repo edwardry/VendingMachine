@@ -13,7 +13,7 @@ public class ScreenTest {
     public void setUp() {
         screen = new Screen();
         transaction = new Transaction();
-        transaction.updateTotal(1.25);
+        TestUtil.addCoins(5, CommonTestConstants.quarter, transaction);
     }
 
     @Test

@@ -2,7 +2,7 @@ public class ButtonPanel {
 
     public boolean press(Product product, Transaction transaction) {
         Double productValue = product.getPrice();
-        Double transactionTotal = transaction.getTotal();
+        Double transactionTotal = CoinUtil.getTotal(transaction);
 
         if(transactionTotal >= productValue) {
             transaction.setStatus(Screen.THANK_YOU);

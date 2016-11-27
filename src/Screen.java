@@ -12,7 +12,7 @@ public class Screen {
     }
 
     public void updateDisplay(Transaction transaction) {
-        display = CoinUtil.convertValueToString(transaction.getTotal());
+        display = CoinUtil.convertValueToString(CoinUtil.getTotal(transaction));
     }
 
     public void updateDisplay(String text) {
