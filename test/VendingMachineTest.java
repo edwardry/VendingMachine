@@ -63,7 +63,7 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(coin);
         actualResult = vendingMachine.checkDisplay();
 
-        verify(screen).updateDisplay(expectedResult);
+        verify(screen, times(2)).updateDisplay(expectedResult);
         assertEquals(expectedResult, actualResult);
     }
 

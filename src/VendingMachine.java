@@ -41,13 +41,26 @@ public class VendingMachine {
             bank.depositMoney(transaction, product);
             returnCoins();
             determineDefaultMessage(bank);
+        } else if(!productHasInventory) {
+                transaction.setStatus(Screen.SOLD_OUT);
         }
 
         screen.updateDisplay(transaction.getStatus());
     }
 
     public String checkDisplay() {
-        return screen.getDisplay();
+        String currentDisplay = screen.getDisplay();
+        determineNewDisplay(transaction);
+        return currentDisplay;
+    }
+
+    private void determineNewDisplay(Transaction transaction) {
+        if(transaction.getTotal().equals(0.0)) {
+            screen.updateDisplay(screen.getDefaultMessage());
+        } else {
+            screen.updateDisplay(transaction);
+        }
+
     }
 
     public void returnCoins() {
