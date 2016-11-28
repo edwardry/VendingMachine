@@ -14,4 +14,7 @@ public class CommonTestConstants {
     public static final String COLA = "Cola";
     public static final String CHIPS = "Chips";
     public static final String CANDY = "Candy";
+    public static final Product cola = new Product(COLA, 1.00, 10);
+    public static final Product chips = new Product(CHIPS, 0.50, 10);
+    public static final Product candy = new Product(CANDY, 0.65, 10);
 }

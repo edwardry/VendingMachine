@@ -11,16 +11,16 @@ public class TestUtil {
         }
     }
 
-    public static Map<Double, List<Coin>> createBankFunds() {
+    public static Map<Double, List<Coin>> createBankFunds(int numberOfNickels, int numberOfDimes, int numberOfQuarters) {
         Map<Double, List<Coin>> coins = new HashMap<>();
 
         Coin nickel = CommonTestConstants.nickel;
         Coin dime = CommonTestConstants.dime;
         Coin quarter = CommonTestConstants.quarter;
 
-        List<Coin> nickels = addCoins(3, nickel);
-        List<Coin> dimes = addCoins(3, dime);
-        List<Coin> quarters = addCoins(3, quarter);
+        List<Coin> nickels = addCoins(numberOfNickels, nickel);
+        List<Coin> dimes = addCoins(numberOfDimes, dime);
+        List<Coin> quarters = addCoins(numberOfQuarters, quarter);
 
         coins.put(CommonTestConstants.NICKEL_VALUE, nickels);
         coins.put(CommonTestConstants.DIME_VALUE, dimes);

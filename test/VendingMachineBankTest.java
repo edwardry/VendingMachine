@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,12 +11,14 @@ public class VendingMachineBankTest {
     private Product product;
     private Double expectedResult;
     private Double actualResult;
+    private Inventory inventory;
 
     @Before
     public void setUp() {
         transaction = new Transaction();
-        product = new Product("Cola", 1.00, 1);
-        bank = new VendingMachineBank(TestUtil.createBankFunds());
+        product = CommonTestConstants.cola;
+        bank = new VendingMachineBank(TestUtil.createBankFunds(3, 3, 3));
+        inventory = new Inventory(Arrays.asList(CommonTestConstants.cola, CommonTestConstants.chips, CommonTestConstants.candy));
     }
 
     @Test
@@ -97,5 +99,19 @@ public class VendingMachineBankTest {
         actualResult = CoinUtil.getTotal(transaction);
 
         assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenBankHasSufficientChangeThenReturnTrue() {
+        Boolean expectedResult = true;
+
+        Boolean actualResult = bank.hasSufficientChange(inventory);
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenBankDoesNotHaveSufficientChangeThenReturnFalse() {
+
     }
 }

@@ -52,6 +52,16 @@ public class VendingMachineBank {
     }
 
     public boolean hasSufficientChange(Inventory inventory) {
+        for(Product product : inventory.getProducts()) {
+            for(Coin coin : ValidCoins.coins) {
+                Double remainder = product.getPrice() % coin.getValue();
+                List<Coin> coinsAvailable = funds.get(coin.getValue());
+                if (remainder != 0 && coinsAvailable.size() == 0) {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 

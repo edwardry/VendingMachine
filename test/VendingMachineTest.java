@@ -18,12 +18,9 @@ public class VendingMachineTest {
 
     @Before
     public void setUp() {
-        Map<Double, List<Coin>> bankFunds = TestUtil.createBankFunds();
+        Map<Double, List<Coin>> bankFunds = TestUtil.createBankFunds(3, 3, 3);
         bank = new VendingMachineBank(bankFunds);
-        Product cola = new Product(CommonTestConstants.COLA, 1.00, 10);
-        Product chips = new Product(CommonTestConstants.CHIPS, 0.50, 10);
-        Product candy = new Product(CommonTestConstants.CANDY, 0.65, 10);
-        inventory = new Inventory(Arrays.asList(cola, chips, candy));
+        inventory = new Inventory(Arrays.asList(CommonTestConstants.cola, CommonTestConstants.chips, CommonTestConstants.candy));
         vendingMachine = new VendingMachine(bank, inventory);
         coins = new ArrayList<>();
         expectedResults = new ArrayList<>();
