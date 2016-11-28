@@ -103,15 +103,33 @@ public class VendingMachineBankTest {
 
     @Test
     public void WhenBankHasSufficientChangeThenReturnTrue() {
-        Boolean expectedResult = true;
-
         Boolean actualResult = bank.hasSufficientChange(inventory);
 
-        assertEquals(expectedResult, actualResult);
+        assertEquals(true, actualResult);
     }
 
     @Test
-    public void WhenBankDoesNotHaveSufficientChangeThenReturnFalse() {
+    public void WhenBankDoesNotHaveSufficientDimesThenReturnFalse() {
+        bank = new VendingMachineBank(TestUtil.createBankFunds(3, 0, 3));
+        Boolean actualResult = bank.hasSufficientChange(inventory);
 
+        assertEquals(false, actualResult);
     }
+
+    @Test
+    public void WhenBankDoesNotHaveSufficientNickelsThenReturnFalse() {
+        bank = new VendingMachineBank(TestUtil.createBankFunds(0, 3, 3));
+        Boolean actualResult = bank.hasSufficientChange(inventory);
+
+        assertEquals(false, actualResult);
+    }
+
+    @Test
+    public void WhenBankDoesNotHaveSufficientQuartersThenReturnFalse() {
+        bank = new VendingMachineBank(TestUtil.createBankFunds(3, 3, 0));
+        Boolean actualResult = bank.hasSufficientChange(inventory);
+
+        assertEquals(false, actualResult);
+    }
+
 }

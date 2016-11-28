@@ -213,4 +213,43 @@ public class VendingMachineTest {
         assertEquals(initialExpectedResult, initialActualResult);
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void WhenVendingMachineIsNotAbleToMakeExactChangeForAnyProductThenExactChangeOnlyIsDisplayedInsteadOfInsertCoin() {
+        expectedResult = Screen.EXACT_CHANGE;
+
+        bank = new VendingMachineBank(TestUtil.createBankFunds(3, 0, 3));
+        vendingMachine = new VendingMachine(bank, inventory);
+
+        actualResult = vendingMachine.checkDisplay();
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void WhenVendingMachineIsNotAbleToMakeExactChangeThenCustomerDepositsCoinsAndNoLongerNeedsExactChange() {
+        int numberOfCoins = 5;
+        expectedResult = Screen.EXACT_CHANGE;
+
+        bank = new VendingMachineBank(TestUtil.createBankFunds(3, 0, 3));
+        vendingMachine = new VendingMachine(bank, inventory);
+
+        actualResult = vendingMachine.checkDisplay();
+        assertEquals(expectedResult, actualResult);
+
+        for(int i=0;i<numberOfCoins;i++) {
+            vendingMachine.insertCoin(CommonTestConstants.dime);
+        }
+
+        expectedResult = Screen.THANK_YOU;
+
+        vendingMachine.pressButton(CommonTestConstants.chips);
+        actualResult = vendingMachine.checkDisplay();
+        assertEquals(expectedResult, actualResult);
+
+        expectedResult = Screen.INSERT_COIN;
+
+        actualResult = vendingMachine.checkDisplay();
+        assertEquals(expectedResult, actualResult);
+    }
 }

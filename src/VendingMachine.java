@@ -22,6 +22,8 @@ public class VendingMachine {
         } else {
             screen.setDefaultMessage(Screen.EXACT_CHANGE);
         }
+
+        screen.updateDisplay(screen.getDefaultMessage());
     }
 
     public void insertCoin(Coin coin) {
